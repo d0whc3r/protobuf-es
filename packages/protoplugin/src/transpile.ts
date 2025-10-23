@@ -80,9 +80,8 @@ export function transpile(
 
     // emit
     emitBOM: false,
-    importsNotUsedAsValues: ts.ImportsNotUsedAsValues.Preserve,
+    verbatimModuleSyntax: true,
     newLine: ts.NewLineKind.LineFeed,
-    preserveValueImports: false,
 
     // JavaScript Support
     allowJs: true,

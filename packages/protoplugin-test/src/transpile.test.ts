@@ -114,7 +114,7 @@ void suite("built-in transpile", () => {
           name: "Error",
           message:
             /^A problem occurred during transpilation and files were not generated\. {2}Contact the plugin author for support\.\n/,
-        },
+        }
       );
     });
     void test("raises error with diagnostics", async () => {
@@ -127,7 +127,7 @@ void suite("built-in transpile", () => {
             "  },",
             "}",
           ]),
-        /test\.ts\(3,17\): error TS4033: Property 'p' of exported interface has or is using private name 'P'\.$/,
+        /test\.ts\(3,17\): error TS2304: Cannot find name 'P'\.$/
       );
     });
     void test("raises error with 3 diagnostics, and elides the rest", async () => {
@@ -160,7 +160,7 @@ void suite("built-in transpile", () => {
             "  },",
             "}",
           ]),
-        /(?:test\.ts\(\d+,\d+\): .+\n){3}2 more diagnostics elided/,
+        /(?:test\.ts\(\d+,\d+\): .+\n){2}3 more diagnostics elided/
       );
     });
   });
