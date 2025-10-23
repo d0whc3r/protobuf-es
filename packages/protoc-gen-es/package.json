@@ -1,5 +1,5 @@
 {
-  "name": "@bufbuild/protoc-gen-es",
+  "name": "@d0whc3r/protoc-gen-es",
   "version": "2.10.0",
   "license": "Apache-2.0",
   "description": "Protocol Buffers code generator for ECMAScript",
