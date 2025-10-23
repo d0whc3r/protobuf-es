@@ -50,6 +50,9 @@
     "turbo": "^2.5.8",
     "typescript": "^5.9.3"
   },
+  "optionalDependencies": {
+    "@biomejs/cli-linux-x64": "^1.9.4"
+  },
   "//": "avoid hoisting of @typescript/vfs, see packages/protoplugin/src/transpile.ts",
   "dependencies": {
     "@typescript/vfs": "1.0.0"
