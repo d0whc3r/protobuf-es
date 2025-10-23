@@ -1,4 +1,4 @@
-# @bufbuild/protoc-gen-es
+# @d0whc3r/protoc-gen-es
 
 The code generator plugin for Protocol Buffers for ECMAScript. Learn more about the project at
 [github.com/bufbuild/protobuf-es](https://github.com/bufbuild/protobuf-es).
@@ -13,7 +13,7 @@ To install the runtime library and the plugin, run:
 
 ```shell
 npm install @bufbuild/protobuf
-npm install --save-dev @bufbuild/protoc-gen-es
+npm install --save-dev @d0whc3r/protoc-gen-es
 ```
 
 ## Generating code
