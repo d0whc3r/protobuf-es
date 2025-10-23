@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-syntax = "proto2";
+syntax = "proto3";
 
 // This file is a reduced copy of https://github.com/bufbuild/protovalidate/blob/main/proto/protovalidate/buf/validate/validate.proto
 // It only contains the definitions necessary to resolve `required` rule, ignores,
@@ -36,6 +36,15 @@ extend google.protobuf.FieldOptions {
 message MessageRules {
   // removed in https://github.com/bufbuild/protovalidate/pull/394
   optional bool disabled = 1 [deprecated = true];
+  
+  // CEL validation rules
+  repeated Constraint cel = 3;
+}
+
+message Constraint {
+  optional string id = 1;
+  optional string message = 2;
+  optional string expression = 3;
 }
 
 message OneofRules {
@@ -53,10 +62,7 @@ message FieldRules {
 
 enum Ignore {
   IGNORE_UNSPECIFIED = 0;
-  // renamed in https://github.com/bufbuild/protovalidate/pull/397
   IGNORE_IF_ZERO_VALUE = 1;
-  // removed in https://github.com/bufbuild/protovalidate/pull/396
-  IGNORE_IF_DEFAULT_VALUE = 2 [deprecated = true];
   IGNORE_ALWAYS = 3;
 }
 

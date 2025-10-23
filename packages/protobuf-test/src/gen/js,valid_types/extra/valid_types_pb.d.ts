@@ -357,7 +357,11 @@ export declare const VTypesSchema: GenMessage<VTypes, {validType: VTypesValid}>;
 export declare type VTypes_Other = Message<"spec.VTypes.Other"> & {
 };
 
-export declare type VTypes_OtherValid = VTypes_Other;
+/**
+ * @generated from message spec.VTypes.Other
+ */
+export declare type VTypes_OtherValid = Message<"spec.VTypes.Other"> & {
+};
 
 /**
  * Describes the message spec.VTypes.Other.
