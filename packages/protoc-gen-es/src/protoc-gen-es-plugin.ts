@@ -99,7 +99,7 @@ export function getReadOnlyFields(message: DescMessage): string[] {
  * @returns Record mapping parent field names to arrays of child field names to omit
  */
 function getNestedReadOnlyFields(
-  message: DescMessage
+  message: DescMessage,
 ): Record<string, string[]> {
   try {
     const messageRules = getOption(message, ext_message);
@@ -158,7 +158,7 @@ function parseOptions(
   options: {
     key: string;
     value: string;
-  }[]
+  }[],
 ): Options {
   let jsonTypes = false;
   let validTypes = {
@@ -536,7 +536,7 @@ function generateDts(schema: Schema<Options>) {
 
 function generateDescDoc(
   f: GeneratedFile,
-  desc: DescFile | DescMessage | DescEnum
+  desc: DescFile | DescMessage | DescEnum,
 ): void {
   let lines: string[];
   switch (desc.kind) {
@@ -801,7 +801,7 @@ function generateMessageShapeMember(
 function applyNestedConstraints(
   typing: Printable,
   fieldName: string,
-  nestedConstraints: Record<string, string[]> | undefined
+  nestedConstraints: Record<string, string[]> | undefined,
 ): Printable {
   if (!nestedConstraints) {
     return typing;

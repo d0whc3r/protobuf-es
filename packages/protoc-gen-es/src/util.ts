@@ -50,7 +50,7 @@ export function messageGenType(
       legacyRequired: boolean;
       protovalidateRequired: boolean;
     };
-  }
+  },
 ): Printable {
   let p2: Printable = [];
   if (options.jsonTypes) {
@@ -71,7 +71,7 @@ export function messageGenType(
 export function fieldTypeScriptType(
   field: DescField | DescExtension,
   imports: GeneratedFile["runtime"],
-  validTypes = false
+  validTypes = false,
 ): {
   typing: Printable;
   optional: boolean;
@@ -104,19 +104,19 @@ export function fieldTypeScriptType(
               kind: "es_shape_ref",
               desc: field.enum,
             },
-            "[]"
+            "[]",
           );
           break;
         case "scalar":
           typing.push(
             scalarTypeScriptType(field.scalar, field.longAsString),
-            "[]"
+            "[]",
           );
           break;
         case "message": {
           typing.push(
             messageFieldTypeScriptType(field, imports, validTypes),
-            "[]"
+            "[]",
           );
           break;
         }
@@ -162,7 +162,7 @@ export function fieldTypeScriptType(
 function messageFieldTypeScriptType(
   field: (DescField | DescExtension) & { message: DescMessage },
   imports: GeneratedFile["runtime"],
-  validTypes: boolean
+  validTypes: boolean,
 ): Printable {
   if (
     isWrapperDesc(field.message) &&
@@ -271,7 +271,7 @@ export function fieldJsonType(field: DescField | DescExtension): Printable {
 export function functionCall(
   fn: Printable,
   args: Printable[],
-  typeParams?: Printable[]
+  typeParams?: Printable[],
 ): Printable {
   let tp: Printable = [];
   if (typeParams !== undefined && typeParams.length > 0) {
