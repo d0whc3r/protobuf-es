@@ -25,6 +25,7 @@
 
 import { parse } from "@bufbuild/cel";
 import type { Expr } from "@bufbuild/cel-spec/cel/expr/syntax_pb.js";
+import { snakeToCamel } from "./util.js";
 
 export interface CELParseResult {
   /** Successfully parsed read-only field names */
@@ -81,7 +82,7 @@ export function parseCELExpression(celExpression: string): CELParseResult {
     result.errors.push(
       `Failed to parse CEL expression "${celExpression}": ${
         error instanceof Error ? error.message : String(error)
-      }`,
+      }`
     );
   }
 
@@ -245,9 +246,10 @@ function isEmptyValue(expr: Expr | undefined): boolean {
       case "doubleValue":
         return constant.constantKind.value === 0;
       case "boolValue":
-        // Consider both true and false as "empty" values for constraints
-        // This allows both == true and == false to trigger field omission
-        return true;
+        // Only treat false as an "empty" value for constraints
+        // A constraint like "this.active == false" could mean the field should be inactive/unset
+        // but "this.active == true" is a validation constraint, not an omission indicator
+        return constant.constantKind.value === false;
       default:
         return false;
     }
@@ -288,15 +290,10 @@ function addFieldToResult(fieldPath: string, result: CELParseResult): void {
     result.readOnlyFields.push(snakeToCamel(fieldPath));
   }
 }
-/**
- * Convert protobuf field names from snake_case to camelCase
- *
- * @param snakeCase - Field name in snake_case
- * @returns Field name in camelCase
- */
-export function snakeToCamel(snakeCase: string): string {
-  return snakeCase.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
-}
+
+// Maximum allowed length for a field name, chosen to prevent excessively long or potentially malicious field names.
+// 100 characters is a pragmatic upper bound for protobuf field names in most real-world schemas.
+const MAX_FIELD_NAME_LENGTH = 100;
 
 /**
  * Validate that a field name is reasonable
@@ -305,5 +302,8 @@ function isValidFieldName(fieldName: string): boolean {
   // Allow alphanumeric characters, dots (for nested fields), and underscores
   // Must start with a letter or underscore
   const fieldNamePattern = /^[a-zA-Z_][a-zA-Z0-9_.]*$/;
-  return fieldNamePattern.test(fieldName) && fieldName.length <= 100; // Reasonable length limit
+  return (
+    fieldNamePattern.test(fieldName) &&
+    fieldName.length <= MAX_FIELD_NAME_LENGTH
+  );
 }

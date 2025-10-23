@@ -35,6 +35,7 @@ import {
   fieldTypeScriptType,
   functionCall,
   messageGenType,
+  snakeToCamel,
 } from "./util.js";
 import { version } from "../package.json";
 import {
@@ -82,7 +83,7 @@ export function getReadOnlyFields(message: DescMessage): string[] {
       // Convert snake_case to camelCase for TypeScript field names
       return field.includes(".") ? field : snakeToCamel(field);
     });
-  } catch (error) {
+  } catch {
     // If there's any error parsing, return empty array to avoid breaking generation
     return [];
   }
@@ -98,7 +99,7 @@ export function getReadOnlyFields(message: DescMessage): string[] {
  * @returns Record mapping parent field names to arrays of child field names to omit
  */
 function getNestedReadOnlyFields(
-  message: DescMessage,
+  message: DescMessage
 ): Record<string, string[]> {
   try {
     const messageRules = getOption(message, ext_message);
@@ -135,13 +136,6 @@ function getNestedReadOnlyFields(
   }
 }
 
-/**
- * Converts snake_case to camelCase
- */
-function snakeToCamel(snakeCase: string): string {
-  return snakeCase.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
-}
-
 export const protocGenEs = createEcmaScriptPlugin({
   name: "protoc-gen-es",
   version: `v${String(version)}`,
@@ -164,7 +158,7 @@ function parseOptions(
   options: {
     key: string;
     value: string;
-  }[],
+  }[]
 ): Options {
   let jsonTypes = false;
   let validTypes = {
@@ -542,7 +536,7 @@ function generateDts(schema: Schema<Options>) {
 
 function generateDescDoc(
   f: GeneratedFile,
-  desc: DescFile | DescMessage | DescEnum,
+  desc: DescFile | DescMessage | DescEnum
 ): void {
   let lines: string[];
   switch (desc.kind) {
@@ -788,12 +782,7 @@ function generateMessageShapeMember(
 
       // Apply nested constraints
       const fieldName = member.localName;
-      typing = applyNestedConstraints(
-        typing,
-        fieldName,
-        nestedConstraints,
-        member
-      );
+      typing = applyNestedConstraints(typing, fieldName, nestedConstraints);
 
       if (optional) {
         f.print("  ", member.localName, "?: ", typing, ";");
@@ -812,8 +801,7 @@ function generateMessageShapeMember(
 function applyNestedConstraints(
   typing: Printable,
   fieldName: string,
-  nestedConstraints: Record<string, string[]> | undefined,
-  _field: DescField,
+  nestedConstraints: Record<string, string[]> | undefined
 ): Printable {
   if (!nestedConstraints) {
     return typing;
