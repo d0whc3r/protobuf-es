@@ -70,7 +70,7 @@ export function transpile(
   const defaultOptions: ts.CompilerOptions = {
     // Type checking
     strict: false,
-    noEmitOnError: true,
+    noEmitOnError: false,
 
     // modules
     module: ts.ModuleKind.ES2020,
@@ -80,7 +80,7 @@ export function transpile(
 
     // emit
     emitBOM: false,
-    verbatimModuleSyntax: true,
+    verbatimModuleSyntax: false,
     newLine: ts.NewLineKind.LineFeed,
 
     // JavaScript Support
@@ -156,6 +156,17 @@ export function transpile(
   }
   if (result.emitSkipped) {
     // When compilation fails, this error message is printed to stderr.
+    const diagnostics = formatDiagnostics(result.diagnostics);
+    throw Error(
+      `A problem occurred during transpilation and files were not generated.  Contact the plugin author for support.\n\n${diagnostics}`,
+    );
+  }
+  // Check for non-ignored diagnostics
+  const ignoredCodes = new Set([2307, 1287]); // TS2307: Cannot find module, TS1287: export in CommonJS with verbatimModuleSyntax
+  const hasNonIgnoredDiagnostics = result.diagnostics.some(
+    (d) => !ignoredCodes.has(d.code),
+  );
+  if (hasNonIgnoredDiagnostics) {
     const diagnostics = formatDiagnostics(result.diagnostics);
     throw Error(
       `A problem occurred during transpilation and files were not generated.  Contact the plugin author for support.\n\n${diagnostics}`,
