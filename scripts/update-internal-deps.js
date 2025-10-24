@@ -50,11 +50,11 @@ function updateInternalDeps() {
     const pkg = JSON.parse(readFileSync(file, "utf-8"));
     let updated = false;
 
-    if (pkg.dependencies && pkg.dependencies["@d0whc3r/protoc-gen-es"]) {
+    if (pkg.dependencies?.["@d0whc3r/protoc-gen-es"]) {
       pkg.dependencies["@d0whc3r/protoc-gen-es"] = newVersion;
       updated = true;
     }
-    if (pkg.devDependencies && pkg.devDependencies["@d0whc3r/protoc-gen-es"]) {
+    if (pkg.devDependencies?.["@d0whc3r/protoc-gen-es"]) {
       pkg.devDependencies["@d0whc3r/protoc-gen-es"] = newVersion;
       updated = true;
     }
