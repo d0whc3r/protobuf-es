@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/d0whc3r/protobuf-es/compare/v1.0.4...v1.0.5) (2025-10-24)
+
+
+### Bug Fixes
+
+* update protoc-gen-es to version 2.10.0 and adjust release workflow ([699e5ac](https://github.com/d0whc3r/protobuf-es/commit/699e5ace7ac538901a2bf24cd0192e10552ee1c6))
+
 ## [1.0.4](https://github.com/d0whc3r/protobuf-es/compare/v1.0.3...v1.0.4) (2025-10-24)
 
 
