@@ -36,7 +36,7 @@ npmPublish();
  */
 function npmPublish() {
   // Only publish protoc-gen-es package
-  const command = `npm publish --workspace packages/protoc-gen-es`;
+  const command = `npm publish --workspace packages/protoc-gen-es --access public`;
   execSync(command, {
     stdio: "inherit",
   });
