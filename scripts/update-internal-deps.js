@@ -36,14 +36,14 @@ function findPackageJsonFiles(dir, files = []) {
  */
 function updateInternalDeps() {
   const protocGenEsPkg = JSON.parse(
-    readFileSync("packages/protoc-gen-es/package.json", "utf-8")
+    readFileSync("packages/protoc-gen-es/package.json", "utf-8"),
   );
   const newVersion = protocGenEsPkg.version;
 
   const packageJsonFiles = findPackageJsonFiles(".").filter(
     (file) =>
       !file.includes("node_modules") &&
-      file !== "packages/protoc-gen-es/package.json"
+      file !== "packages/protoc-gen-es/package.json",
   );
 
   for (const file of packageJsonFiles) {
