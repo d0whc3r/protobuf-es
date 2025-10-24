@@ -57,5 +57,6 @@
   "//": "avoid hoisting of @typescript/vfs, see packages/protoplugin/src/transpile.ts",
   "dependencies": {
     "@typescript/vfs": "1.0.0"
-  }
+  },
+  "version": "1.0.0"
 }
