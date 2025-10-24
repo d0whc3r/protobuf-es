@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-syntax = "proto2";
+syntax = "proto3";
 
 // This file is a reduced copy of https://github.com/bufbuild/protovalidate/blob/main/proto/protovalidate/buf/validate/validate.proto
 // It only contains the definitions necessary to resolve `required` rule, ignores,
@@ -21,12 +21,30 @@ package buf.validate;
 
 import "google/protobuf/descriptor.proto";
 
+extend google.protobuf.MessageOptions {
+  optional MessageRules message = 1159;
+}
+
 extend google.protobuf.OneofOptions {
   optional OneofRules oneof = 1159;
 }
 
 extend google.protobuf.FieldOptions {
   optional FieldRules field = 1159;
+}
+
+message MessageRules {
+  // removed in https://github.com/bufbuild/protovalidate/pull/394
+  optional bool disabled = 1 [deprecated = true];
+  
+  // CEL validation rules
+  repeated Constraint cel = 3;
+}
+
+message Constraint {
+  optional string id = 1;
+  optional string message = 2;
+  optional string expression = 3;
 }
 
 message OneofRules {

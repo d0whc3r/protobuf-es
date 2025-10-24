@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
-import { existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 
 /*
@@ -28,7 +25,6 @@ import { execSync } from "node:child_process";
  * 5. Merge PR and create a release on GitHub
  */
 
-const tag = determinePublishTag(findWorkspaceVersion("packages"));
 const uncommitted = gitUncommitted();
 if (uncommitted.length > 0) {
   throw new Error("Uncommitted changes found: \n" + uncommitted);
@@ -39,11 +35,8 @@ npmPublish();
  *
  */
 function npmPublish() {
-  const command =
-    `npm publish --tag ${tag}` +
-    " --workspace packages/protobuf" +
-    " --workspace packages/protoplugin" +
-    " --workspace packages/protoc-gen-es";
+  // Only publish protoc-gen-es package
+  const command = `npm publish --workspace packages/protoc-gen-es`;
   execSync(command, {
     stdio: "inherit",
   });
@@ -60,56 +53,4 @@ function gitUncommitted() {
     return "";
   }
   return out;
-}
-
-/**
- * @param {string} version
- * @returns {string}
- */
-function determinePublishTag(version) {
-  if (/^\d+\.\d+\.\d+$/.test(version)) {
-    return "latest";
-  }
-  if (/^\d+\.\d+\.\d+-alpha.*$/.test(version)) {
-    return "alpha";
-  }
-  if (/^\d+\.\d+\.\d+-beta.*$/.test(version)) {
-    return "beta";
-  }
-  if (/^\d+\.\d+\.\d+-rc.*$/.test(version)) {
-    return "rc";
-  }
-  throw new Error(`Unable to determine publish tag from version ${version}`);
-}
-
-/**
- * @param {string} packagesDir
- * @returns {string}
- */
-function findWorkspaceVersion(packagesDir) {
-  let version = undefined;
-  for (const entry of readdirSync(packagesDir, { withFileTypes: true })) {
-    if (!entry.isDirectory()) {
-      continue;
-    }
-    const path = join(packagesDir, entry.name, "package.json");
-    if (existsSync(path)) {
-      const pkg = JSON.parse(readFileSync(path, "utf-8"));
-      if (pkg.private === true) {
-        continue;
-      }
-      if (!pkg.version) {
-        throw new Error(`${path} is missing "version"`);
-      }
-      if (version === undefined) {
-        version = pkg.version;
-      } else if (version !== pkg.version) {
-        throw new Error(`${path} has unexpected version ${pkg.version}`);
-      }
-    }
-  }
-  if (version === undefined) {
-    throw new Error("unable to find workspace version");
-  }
-  return version;
 }

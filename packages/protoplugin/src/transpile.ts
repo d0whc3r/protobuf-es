@@ -70,6 +70,7 @@ export function transpile(
   const defaultOptions: ts.CompilerOptions = {
     // Type checking
     strict: false,
+    noEmitOnError: false,
 
     // modules
     module: ts.ModuleKind.ES2020,
@@ -79,9 +80,8 @@ export function transpile(
 
     // emit
     emitBOM: false,
-    importsNotUsedAsValues: ts.ImportsNotUsedAsValues.Preserve,
+    verbatimModuleSyntax: false,
     newLine: ts.NewLineKind.LineFeed,
-    preserveValueImports: false,
 
     // JavaScript Support
     allowJs: true,
@@ -109,6 +109,24 @@ export function transpile(
 
   // Create the transpiler (a ts.Program object)
   const program = createTranspiler(options, files);
+
+  const syntacticDiagnostics = program.getSyntacticDiagnostics();
+  const semanticDiagnostics = program.getSemanticDiagnostics();
+  const allDiagnostics = ts.sortAndDeduplicateDiagnostics([
+    ...syntacticDiagnostics,
+    ...semanticDiagnostics,
+  ]);
+  const ignoredCodes = new Set([2307, 1287]); // TS2307: Cannot find module, TS1287: export in CommonJS with verbatimModuleSyntax
+  const hasNonIgnoredErrors = allDiagnostics.some(
+    (d) =>
+      d.category === ts.DiagnosticCategory.Error && !ignoredCodes.has(d.code),
+  );
+  if (hasNonIgnoredErrors) {
+    const diagnostics = formatDiagnostics(allDiagnostics);
+    throw Error(
+      `A problem occurred during transpilation and files were not generated.  Contact the plugin author for support.\n\n${diagnostics}`,
+    );
+  }
 
   const results: FileInfo[] = [];
   let err: Error | undefined;
@@ -156,6 +174,16 @@ export function transpile(
   }
   if (result.emitSkipped) {
     // When compilation fails, this error message is printed to stderr.
+    const diagnostics = formatDiagnostics(result.diagnostics);
+    throw Error(
+      `A problem occurred during transpilation and files were not generated.  Contact the plugin author for support.\n\n${diagnostics}`,
+    );
+  }
+  // Check for non-ignored diagnostics
+  const hasNonIgnoredDiagnostics = result.diagnostics.some(
+    (d) => !ignoredCodes.has(d.code),
+  );
+  if (hasNonIgnoredDiagnostics) {
     const diagnostics = formatDiagnostics(result.diagnostics);
     throw Error(
       `A problem occurred during transpilation and files were not generated.  Contact the plugin author for support.\n\n${diagnostics}`,

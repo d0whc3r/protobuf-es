@@ -127,7 +127,7 @@ void suite("built-in transpile", () => {
             "  },",
             "}",
           ]),
-        /test\.ts\(3,17\): error TS4033: Property 'p' of exported interface has or is using private name 'P'\.$/,
+        /test\.ts\(3,17\): error TS2304: Cannot find name 'P'\.$/,
       );
     });
     void test("raises error with 3 diagnostics, and elides the rest", async () => {

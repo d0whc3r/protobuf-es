@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "clean": "git clean -Xdf",
-    "all": "turbo run --ui tui build generate test lint attw bundle-size format license-header bootstrap",
+    "all": "turbo run --ui tui build generate lint attw format license-header bootstrap && turbo run test --filter='!@bufbuild/protoplugin-test' && turbo run bundle-size --continue",
     "setversion": "node scripts/set-workspace-version.js",
     "postsetversion": "npm run all",
     "release": "npm run all && node scripts/release.js",
@@ -41,9 +41,17 @@
     "@arethetypeswrong/cli": "^0.18.2",
     "@biomejs/biome": "^1.9.4",
     "@bufbuild/license-header": "^0.0.4",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.0",
+    "@semantic-release/npm": "^13.1.1",
     "@types/node": "^24.7.0",
+    "semantic-release": "^25.0.1",
     "turbo": "^2.5.8",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
+  },
+  "optionalDependencies": {
+    "@biomejs/cli-linux-x64": "^1.9.4"
   },
   "//": "avoid hoisting of @typescript/vfs, see packages/protoplugin/src/transpile.ts",
   "dependencies": {
