@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/d0whc3r/protobuf-es/compare/v1.0.0...v1.0.1) (2025-10-24)
+
+
+### Bug Fixes
+
+* include package-lock.json in semantic-release git assets ([da16b72](https://github.com/d0whc3r/protobuf-es/commit/da16b727a2e19d3c1d77ade83d43c3024626e5ea))
+
 # 1.0.0 (2025-10-24)
 
 
