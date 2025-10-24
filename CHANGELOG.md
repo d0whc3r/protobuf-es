@@ -1,3 +1,12 @@
+## [1.0.6](https://github.com/d0whc3r/protobuf-es/compare/v1.0.5...v1.0.6) (2025-10-24)
+
+
+### Bug Fixes
+
+* correct syntax by adding missing commas in update-internal-deps.js ([0f07bee](https://github.com/d0whc3r/protobuf-es/commit/0f07bee48fea6e15ce0aca437d8688993e4e181b))
+* update release configuration to include additional package assets and prepare command ([6f813bc](https://github.com/d0whc3r/protobuf-es/commit/6f813bc7fefe1f393888deea9ee5b2bd1fbc03dd))
+* use optional chaining for safer access to dependencies in update-internal-deps.js ([070d381](https://github.com/d0whc3r/protobuf-es/commit/070d3810207d5b90dbb77d8fc3c34444725f7dd6))
+
 ## [1.0.5](https://github.com/d0whc3r/protobuf-es/compare/v1.0.4...v1.0.5) (2025-10-24)
 
 
