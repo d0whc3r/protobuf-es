@@ -5,6 +5,12 @@
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
     [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "node scripts/update-internal-deps.js"
+      }
+    ],
+    [
       "@semantic-release/npm",
       {
         "npmPublish": true,
@@ -20,7 +26,16 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md", "packages/protoc-gen-es/package.json"],
+        "assets": [
+          "CHANGELOG.md",
+          "packages/protoc-gen-es/package.json",
+          "packages/protobuf-example/package.json",
+          "packages/protobuf-conformance/package.json",
+          "deno/conformance/package.json",
+          "packages/protobuf-test/package.json",
+          "packages/protoplugin-example/package.json",
+          "packages/bundle-size/package.json"
+        ],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
