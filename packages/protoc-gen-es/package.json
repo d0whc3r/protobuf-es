@@ -48,8 +48,5 @@
       "optional": true
     }
   },
-  "files": [
-    "dist/**",
-    "bin/**"
-  ]
+  "files": ["dist/**", "bin/**"]
 }
