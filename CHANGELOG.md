@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/d0whc3r/protobuf-es/compare/v1.0.1...v1.0.2) (2025-10-24)
+
+
+### Bug Fixes
+
+* update npm publish command to include public access for protoc-gen-es package ([fc73b5d](https://github.com/d0whc3r/protobuf-es/commit/fc73b5de63e90cf3a10fbf48a2f5a031b3167de4))
+
 ## [1.0.1](https://github.com/d0whc3r/protobuf-es/compare/v1.0.0...v1.0.1) (2025-10-24)
 
 
