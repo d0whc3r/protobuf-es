@@ -35,9 +35,9 @@ function findPackageJsonFiles(dir, files = []) {
  * Update internal dependencies to @d0whc3r/protoc-gen-es to the latest version
  */
 function updateInternalDeps() {
-  const newVersion = process.env.NEXT_RELEASE_VERSION;
+  const newVersion = process.argv[2];
   if (!newVersion) {
-    console.error("NEXT_RELEASE_VERSION environment variable not set");
+    console.error("Version argument not provided");
     process.exit(1);
   }
 

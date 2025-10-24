@@ -7,7 +7,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "node scripts/update-internal-deps.js"
+        "prepareCmd": "node scripts/update-internal-deps.js ${nextRelease.version}"
       }
     ],
     [
