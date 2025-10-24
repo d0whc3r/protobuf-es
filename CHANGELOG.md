@@ -1,3 +1,12 @@
+## [1.0.3](https://github.com/d0whc3r/protobuf-es/compare/v1.0.2...v1.0.3) (2025-10-24)
+
+
+### Bug Fixes
+
+* downgrade @d0whc3r/protoc-gen-es version to 2.10.0 across all packages ([16b9935](https://github.com/d0whc3r/protobuf-es/commit/16b99351244dd84165cb10bdc7fad672a7cb6323))
+* update package version to 2.10.1 and adjust npm publish configuration ([bce53e5](https://github.com/d0whc3r/protobuf-es/commit/bce53e51ac1220d67ba004fdf07a420b41a4cc47))
+* update repository URLs to point to the correct GitHub account ([241a2ca](https://github.com/d0whc3r/protobuf-es/commit/241a2ca2276015315d6f0b34aa179e5d328f9fe9))
+
 ## [1.0.2](https://github.com/d0whc3r/protobuf-es/compare/v1.0.1...v1.0.2) (2025-10-24)
 
 
