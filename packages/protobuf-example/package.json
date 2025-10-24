@@ -16,7 +16,7 @@
   "dependencies": {
     "@bufbuild/buf": "^1.59.0",
     "@bufbuild/protobuf": "2.10.0",
-    "@d0whc3r/protoc-gen-es": "1.0.6",
+    "@d0whc3r/protoc-gen-es": "1.0.7",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }

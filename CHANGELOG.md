@@ -1,3 +1,11 @@
+## [1.0.7](https://github.com/d0whc3r/protobuf-es/compare/v1.0.6...v1.0.7) (2025-10-24)
+
+
+### Bug Fixes
+
+* pass nextRelease.version as an argument to update-internal-deps script for improved version handling ([3d8bb1f](https://github.com/d0whc3r/protobuf-es/commit/3d8bb1fd886a617fa5bb75f02ec3d6364f0441d3))
+* update @d0whc3r/protoc-gen-es to version 1.0.6 across all packages and improve dependency update script ([7cd912c](https://github.com/d0whc3r/protobuf-es/commit/7cd912cda50e205eeeea19c8bd4da35b03a1949b))
+
 ## [1.0.6](https://github.com/d0whc3r/protobuf-es/compare/v1.0.5...v1.0.6) (2025-10-24)
 
 

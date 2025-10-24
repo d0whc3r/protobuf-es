@@ -1,6 +1,6 @@
 {
   "name": "@d0whc3r/protoc-gen-es",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "Apache-2.0",
   "description": "Protocol Buffers code generator for ECMAScript",
   "keywords": [
