@@ -7,7 +7,8 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": false
+        "npmPublish": false,
+        "pkgRoot": "packages/protoc-gen-es"
       }
     ],
     [
@@ -25,7 +26,7 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md", "package.json", "package-lock.json"],
+        "assets": ["CHANGELOG.md", "packages/protoc-gen-es/package.json"],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
