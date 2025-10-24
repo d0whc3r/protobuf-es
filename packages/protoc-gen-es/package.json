@@ -1,6 +1,6 @@
 {
   "name": "@d0whc3r/protoc-gen-es",
-  "version": "2.10.0",
+  "version": "2.10.1",
   "license": "Apache-2.0",
   "description": "Protocol Buffers code generator for ECMAScript",
   "keywords": [
@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bufbuild/protobuf-es.git",
+    "url": "https://github.com/d0whc3r/protobuf-es.git",
     "directory": "packages/protoc-gen-es"
   },
   "bin": {

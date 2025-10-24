@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bufbuild/protobuf-es.git",
+    "url": "https://github.com/d0whc3r/protobuf-es.git",
     "directory": "packages/protoplugin"
   },
   "scripts": {
