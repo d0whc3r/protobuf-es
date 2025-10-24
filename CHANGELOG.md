@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/d0whc3r/protobuf-es/compare/v1.0.3...v1.0.4) (2025-10-24)
+
+
+### Bug Fixes
+
+* version update ([96679ed](https://github.com/d0whc3r/protobuf-es/commit/96679ed15f90d3f64b07373b1455cfef5250bb9b))
+
 ## [1.0.3](https://github.com/d0whc3r/protobuf-es/compare/v1.0.2...v1.0.3) (2025-10-24)
 
 
